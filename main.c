@@ -2,6 +2,15 @@
 #include <stdlib.h>
 #include <time.h>
 
+void media(int *vetor){
+    float media = 0;
+    for(int i = 0; i < 1000; i++){
+        media = media + vetor[i];
+    }
+    media = media / 1000;
+    printf("A media desse vetor eh: %.6f\n", media);
+}
+
 void bubbleSort(int *vetor){
     int aux;
     for(int j = 0; j < 1000; j++){
@@ -29,6 +38,7 @@ int main(){
     for(int i = 0; i < 1000; i++){
         printf("%d\n", vetor[i]);
     }
+    media(vetor);
 
 
     return 0;
