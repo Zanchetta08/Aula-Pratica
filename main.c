@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 
+void imprimirVet(int *vetor){
+    printf("\n==========================================================================================================================================================\n");
+    for(int i = 0; i < 1000; i++){
+        printf("%d - ", vetor[i]);
+    }
+    printf("\n==========================================================================================================================================================\n");
+}
+
 void menorValor(int *vetor){
     int valor = vetor[0];
     for(int i = 0; i < 1000; i++){
@@ -11,6 +19,7 @@ void menorValor(int *vetor){
     }
     printf("O menor valor desse vetor eh: %d\n", valor);
 }
+
 void maiorValor(int *vetor){
     int valor = vetor[0];
     for(int i = 0; i < 1000; i++){
@@ -32,14 +41,14 @@ void media(int *vetor){
     for(int i = 0; i < 1000; i++){
         media = media + vetor[i];
     }
-    media = media / 1000;
+    media = media / 1000.0;
     printf("A media desse vetor eh: %.2f\n", media);
 }
 
 void bubbleSort(int *vetor){
     int aux;
-    for(int j = 0; j < 1000; j++){
-        for(int i = 0; i < 1000; i++){
+    for(int j = 0; j < 1000 - 1; j++){
+        for(int i = 0; i < 1000 - j - 1; i++){
             if(vetor[i+1] < vetor[i]){
                 aux = vetor[i];
                 vetor[i] = vetor[i+1];
@@ -47,22 +56,21 @@ void bubbleSort(int *vetor){
             }
         }
     }
+    imprimirVet(vetor);
 }
 
 void preencheVet(int *vetor){
     srand( (unsigned)time(NULL) );
     for(int i = 0; i < 1000; i++){
-        vetor[i] = 1 + (rand() % 10000);
+        vetor[i] = 1 + (rand() % 100);
     }
+   imprimirVet(vetor);
 }
 
 int main(){
     int vetor[1000];
     preencheVet(vetor);
     bubbleSort(vetor);
-    for(int i = 0; i < 1000; i++){
-        printf("%d\n", vetor[i]);
-    }
     media(vetor);
     mediana(vetor);
     maiorValor(vetor);
