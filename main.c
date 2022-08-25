@@ -2,12 +2,47 @@
 #include <stdlib.h>
 #include <time.h>
 
+void troca(int *vetor, int i, int j){
+	int aux = vetor[i];
+	vetor[i] = vetor[j];
+	vetor[j] = aux;
+}
+
+int particiona(int *vetor, int inicio, int fim){
+	int pivo, pivo_indice, i;
+	pivo = vetor[fim];
+	pivo_indice = inicio;
+	for(i = inicio; i < fim; i++){
+		if(vetor[i] <= pivo){
+			troca(vetor, i, pivo_indice);
+			pivo_indice++;
+		}
+	}
+	troca(vetor, pivo_indice, fim);
+	return pivo_indice;
+}
+
+int particiona_random(int *vetor, int inicio, int fim){
+	int pivo_indice = (rand() % (fim - inicio + 1)) + inicio;
+	troca(vetor, pivo_indice, fim);
+	return particiona(vetor, inicio, fim);
+}
+
+void quick_sort(int *vetor, int inicio, int fim){
+	if(inicio < fim){
+		int pivo_indice = particiona_random(vetor, inicio, fim);
+		quick_sort(vetor, inicio, pivo_indice - 1);
+		quick_sort(vetor, pivo_indice + 1, fim);
+	}
+}
+//=============================================
+
 void imprimirVet(int *vetor){
-    printf("\n==========================================================================================================================================================\n");
+    printf("\n\n\n\n\n\n");
     for(int i = 0; i < 1000; i++){
         printf("%d - ", vetor[i]);
     }
-    printf("\n==========================================================================================================================================================\n");
+    printf("\n\n\n\n\n\n");
 }
 
 void menorValor(int *vetor){
@@ -70,7 +105,9 @@ void preencheVet(int *vetor){
 int main(){
     int vetor[1000];
     preencheVet(vetor);
-    bubbleSort(vetor);
+    //bubbleSort(vetor);
+    quick_sort(vetor, 0, 999);
+    imprimirVet(vetor);
     media(vetor);
     mediana(vetor);
     maiorValor(vetor);
@@ -78,3 +115,13 @@ int main(){
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
